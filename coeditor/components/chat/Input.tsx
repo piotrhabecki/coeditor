@@ -11,11 +11,6 @@ interface input {
 
 const Input = (props: input) => {
 
-
-  let socket = useSelector((state: RootState) => {
-    return state.socket.messageSocket;
-  });
-
   let username = useSelector((state: RootState) => {
     return state.session.username;
   });
