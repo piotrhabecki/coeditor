@@ -1,4 +1,4 @@
-import { Button, Intent } from "@blueprintjs/core";
+import { Button, Intent, Spinner } from "@blueprintjs/core";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -17,6 +17,7 @@ const showToast = (message: string) => {
 const JoinRoom = () => {
   const [roomId, setRoomId] = useState("");
   const [name, setName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -40,15 +41,15 @@ const JoinRoom = () => {
       if (res.ok) {
         dispatch(sessionActions.setRoomId(roomId));
         dispatch(sessionActions.setUsername(name));
+        setIsLoading(true);
       }
       return res;
     };
     const res = await createRoom(name, roomId);
     if (res.ok) {
-      localStorage.setItem("username", name)
+      localStorage.setItem("username", name);
       router.push(`/coeditor/${roomId}`);
-    }
-    else {
+    } else {
       const response = await res.json();
       showToast(response.message);
     }
@@ -56,16 +57,24 @@ const JoinRoom = () => {
 
   return (
     <div className={classes.join_room__container}>
-      <h2>Join room</h2>
-      <input onChange={onRoomIdChange} placeholder="room id" />
-      <input onChange={onNameChange} placeholder="your name" />
-      <Button
-        text={"JOIN"}
-        small
-        intent={Intent.PRIMARY}
-        disabled={roomId.length == 0 || name.length == 0}
-        onClick={onJoinSession}
-      />
+      {isLoading ? (
+        <div>
+          <Spinner />
+        </div>
+      ) : (
+        <>
+          <h2>Join room</h2>
+          <input onChange={onRoomIdChange} placeholder="room id" />
+          <input onChange={onNameChange} placeholder="your name" />
+          <Button
+            text={"JOIN"}
+            small
+            intent={Intent.PRIMARY}
+            disabled={roomId.length == 0 || name.length == 0}
+            onClick={onJoinSession}
+          />
+        </>
+      )}
     </div>
   );
 };

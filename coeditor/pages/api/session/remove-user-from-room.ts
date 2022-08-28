@@ -7,27 +7,24 @@ export default async function handler(
 ) {
   if (req.method === "DELETE") {
     const Redis = require("ioredis");
-    const redisClient = new Redis(
-      process.env.REDIS_CONNECTION_STRING
-    );
+    const redisClient = new Redis(process.env.REDIS_CONNECTION_STRING);
 
     const username = req.body.username;
     const roomId = req.body.roomId;
     const socketId = req.body.socketId;
 
-    console.log("ON REMOVE")
+    console.log("ON REMOVE");
 
     const users = await redisClient.lrange(`USERS:${roomId}`, 0, -1);
-    if (users.includes(username)) {
-      await redisClient.lrem(`USERS:${roomId}`, -1, `${username}`);
-      await redisClient.hdel(`ROOM:${roomId}`, socketId, username);
+    console.log(users);
+    if (users.length === 1) {
+      await redisClient.del(`USERS:${roomId}`);
+      await redisClient.del(`ROOM:${roomId}`);
+    } else if (users.includes(username)) {
+      await redisClient.lrem(`USERS:${roomId}`, -5, username);
+      await redisClient.hdel(`ROOM:${roomId}`, -5, socketId, username);
 
-      if(users.length === 1)
-      {
-        await redisClient.del(`USERS:${roomId}`);
-        await redisClient.del(`ROOM:${roomId}`);
-      }
-      pusher.trigger(roomId, "USER_DISCONNECTED", username)
+      pusher.trigger(roomId, "USER_DISCONNECTED", username);
       await redisClient.quit();
       res.status(200).json({ username: username });
       return;

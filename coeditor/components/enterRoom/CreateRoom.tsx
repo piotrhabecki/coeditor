@@ -1,4 +1,4 @@
-import { Button, Intent } from "@blueprintjs/core";
+import { Button, Intent, Spinner } from "@blueprintjs/core";
 import { useRouter } from "next/router";
 import { DetailedHTMLProps, InputHTMLAttributes, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -8,6 +8,7 @@ import classes from "./EnterRoom.module.css";
 
 const CreateRoom = ()  => {
     const [name, setName] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
     const router = useRouter()
 
@@ -27,6 +28,7 @@ const CreateRoom = ()  => {
           
           dispatch(sessionActions.setRoomId(roomId))
           dispatch(sessionActions.setUsername(name))
+          setIsLoading(true);
           return roomId;
         }
       };
@@ -47,7 +49,7 @@ const CreateRoom = ()  => {
   
     return (
       <div className={classes.join_room__container}>
-        <h2>Create room</h2>
+        {isLoading ? <div><Spinner /></div> : <><h2>Create room</h2>
         <input onChange={onNameChange} placeholder="your name" onKeyDown={onEnter}/>
         <Button
           text={"CREATE"}
@@ -55,7 +57,7 @@ const CreateRoom = ()  => {
           intent={Intent.PRIMARY}
           disabled={name.length == 0}
           onClick={onGenerateSession}
-        />
+        /></>}
       </div>
     );
   };
