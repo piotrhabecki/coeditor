@@ -1,0 +1,39 @@
+.footer {
+    background: var(--color-primary);
+    padding: 3rem 0;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  
+  .footer a {
+    color: #184A90;
+  }
+  
+  .footer__logo {
+    font-size: 2rem;
+    font-weight: 500;
+    display: inline-block;
+  }
+  
+  .footer_permalink {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin: 0 1rem 1rem;
+  }
+  
+  .footer__copyright {
+    margin-bottom: 1rem;
+    color: #184A90;
+  }
+  
+  /* ================ MEDIA QUERIES (SMALL DEVICES) ================== */
+  
+  @media screen and (max-width: 600px) {
+    .footer_permalink {
+      flex-direction: column;
+      gap: 1.5rem;
+  }
+  }
+  

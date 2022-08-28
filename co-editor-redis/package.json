@@ -1,0 +1,38 @@
+{
+  "name": "co-editor-redis",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@blueprintjs/core": "^4.8.0",
+    "@blueprintjs/select": "^4.5.3",
+    "@monaco-editor/react": "^4.4.5",
+    "@reduxjs/toolkit": "^1.8.4",
+    "@types/react-redux": "^7.1.24",
+    "ioredis": "^5.2.2",
+    "monaco-editor": "^0.34.0",
+    "next": "12.2.5",
+    "pusher": "^5.1.1-beta",
+    "pusher-js": "^7.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.2",
+    "socket.io": "^4.5.1",
+    "socket.io-client": "^4.5.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@redux-devtools/core": "^3.13.1",
+    "@types/node": "^18.7.2",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "eslint": "8.21.0",
+    "eslint-config-next": "12.2.5",
+    "typescript": "4.7.4"
+  }
+}

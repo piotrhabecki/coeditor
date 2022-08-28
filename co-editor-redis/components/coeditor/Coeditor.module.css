@@ -1,0 +1,33 @@
+.app__container {
+  display: grid;
+  grid-template-rows: 35px 95%;
+  height: 100%;
+  width: 100%;
+}
+
+.editor__container {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  padding-top: 5px;
+}
+
+.editor__space {
+  display: grid;
+  grid-template-rows: 70% 30%;
+  padding-top: 5px;
+  padding-right: 10px; 
+}
+
+.editor__chat {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding-top: 5px;
+}
+
+.editor_card {
+  padding-top: 1px;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  border: 1px solid gray;
+}

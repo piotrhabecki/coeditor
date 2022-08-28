@@ -1,0 +1,13 @@
+.infobar_card {
+    padding: 0;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+}
+
+.code_select {
+	padding-left: 10px;
+}
