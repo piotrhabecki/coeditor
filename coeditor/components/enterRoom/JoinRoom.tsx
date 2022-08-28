@@ -41,10 +41,10 @@ const JoinRoom = () => {
       if (res.ok) {
         dispatch(sessionActions.setRoomId(roomId));
         dispatch(sessionActions.setUsername(name));
-        setIsLoading(true);
       }
       return res;
     };
+    setIsLoading(true);
     const res = await createRoom(name, roomId);
     if (res.ok) {
       localStorage.setItem("username", name);

@@ -28,10 +28,10 @@ const CreateRoom = ()  => {
           
           dispatch(sessionActions.setRoomId(roomId))
           dispatch(sessionActions.setUsername(name))
-          setIsLoading(true);
           return roomId;
         }
       };
+      setIsLoading(true);
       const roomId = await createRoom(name);
       localStorage.setItem("username", name)
       router.push(`/coeditor/${roomId}`)
