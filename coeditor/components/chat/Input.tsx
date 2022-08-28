@@ -38,7 +38,6 @@ const Input = (props: input) => {
   }
 
   const onSend = () => {
-    console.log("ON SEND CLICKED")
     props.onMessageSend(message);
     setMessage("");
   }

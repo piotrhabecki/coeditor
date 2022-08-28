@@ -30,10 +30,8 @@ const EditorPage: React.FC<{
       socketInitializer(username, roomId, otherUsersConnected);
     }
 
-    window.onbeforeunload = async () => {
-      if(JSON.parse(JSON.stringify(performance.getEntriesByType("navigation")[0])).type !== 'reload')
-      {
-        await fetch(`/api/session/remove-user-from-room`, {
+    window.onbeforeunload = () => {
+        fetch(`/api/session/remove-user-from-room`, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -46,12 +44,9 @@ const EditorPage: React.FC<{
         });
         messagePusher!.disconnect();
         dispatch(socketActions.setMessagePusher(null));
-      }
+        router.push("/");
     }
   }
-
-  //@ts-ignore
-  console.log()
   
   async function socketInitializer(username: string, roomId: string, otherUsersConnected: boolean) {
     if (roomId.length > 0) {

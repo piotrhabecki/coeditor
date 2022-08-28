@@ -36,7 +36,6 @@ const Chat = () => {
   async function onMessageSend(message: string) {
     if(message.length > 0)
     {
-      console.log("ON MESSAGE SEND FUNCTION")
       const msg = JSON.stringify({ username, message });
       await fetch(`/api/messages/send-message`, {
         headers: {
@@ -61,7 +60,6 @@ const Chat = () => {
     })
     
     messagePusher.bind("NEW_MESSAGE", (message: ChatMessage) => {
-      console.log("ON NEW MESSAGE TRIGGER")
       dispatch(messagesActions.addMessage(message));
     });
   }
