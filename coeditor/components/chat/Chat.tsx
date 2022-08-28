@@ -9,6 +9,7 @@ import { sessionActions } from "../../store/session-slice";
 
 import classes from "./Chat.module.css";
 import { AppToaster } from "../UI/toaster";
+import ChatMessage from "../../models/chatMessage";
 
 const showToast = (message: string) => {
   AppToaster!.show({
@@ -35,6 +36,7 @@ const Chat = () => {
   async function onMessageSend(message: string) {
     if(message.length > 0)
     {
+      console.log("ON MESSAGE SEND FUNCTION")
       const msg = JSON.stringify({ username, message });
       await fetch(`/api/messages/send-message`, {
         headers: {
@@ -58,16 +60,10 @@ const Chat = () => {
       showToast(`User ${username} disconnected`);
     })
     
-    messagePusher.bind("NEW_MESSAGE", async () => {
-      const res = await fetch(`/api/messages/get-messages?roomId=${roomId}`, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "GET",
-      });
-      const result = await res.json();
-      dispatch(messagesActions.setMessages(result.messages));
-    });
+    messagePusher.bind("NEW_MESSAGE", (message: ChatMessage) => {
+      console.log("ON NEW MESSAGE TRIGGER")
+      dispatch(messagesActions.addMessage(message));
+    }, messagePusher.unbind());
   }
 
 

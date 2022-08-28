@@ -34,15 +34,20 @@ const Input = (props: input) => {
   const onEnter = (event: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => {
     if(event.key === "Enter")
     {
-      props.onMessageSend(message);
-      setMessage("");
+      onSend()
     }
+  }
+
+  const onSend = () => {
+    console.log("ON SEND CLICKED")
+    props.onMessageSend(message);
+    setMessage("");
   }
 
   return (
     <div className={classes.input__container}>
       <input onChange={onMessageChange} className={classes.input} onKeyDown={onEnter} value={message}/>
-      <Button onClick={() => props.onMessageSend(message)} className={classes.send__button} active minimal intent='primary' icon='send-message'/>
+      <Button onClick={onSend} className={classes.send__button} active minimal intent='primary' icon='send-message'/>
     </div>
   );
 };

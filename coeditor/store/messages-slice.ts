@@ -20,6 +20,12 @@ const messagesState = createSlice({
       })
       state.messages = messages
     },
+    addMessage: (state, action) => {
+      console.log("ON ADD MESSAGE IN SLICE")
+      const tempMessages = state.messages;
+      tempMessages.push(new ChatMessage(action.payload.username, action.payload.message))
+      state.messages = tempMessages;
+    }
   },
 });
 
