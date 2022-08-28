@@ -1,4 +1,3 @@
-import SendButton from "./SendButton";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { DetailedHTMLProps, InputHTMLAttributes, KeyboardEventHandler, useState } from "react";
@@ -7,7 +6,7 @@ import classes from "./Chat.module.css";
 import { Button } from "@blueprintjs/core";
 
 interface input {
-  onMessageSend: (message: string) => void
+  onMessageSend: (message: string) => Promise<void>
 }
 
 const Input = (props: input) => {
@@ -31,16 +30,16 @@ const Input = (props: input) => {
     setMessage(event.currentTarget.value);
   }
 
-  const onEnter = (event: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => {
+  const onEnter = async (event: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => {
     if(event.key === "Enter")
     {
-      onSend()
+      await onSend()
     }
   }
 
-  const onSend = () => {
+  const onSend = async () => {
     console.log("ON SEND CLICKED")
-    props.onMessageSend(message);
+    await props.onMessageSend(message);
     setMessage("");
   }
 

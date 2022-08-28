@@ -48,7 +48,7 @@ const Chat = () => {
     }
   }
 
-  if(messagePusher)
+  if(messagePusher !== null)
   {
     messagePusher.bind('NEW_USER_CONNECTED', (username: string) => {
       dispatch(sessionActions.setOtherUserConnected(true));
@@ -63,7 +63,7 @@ const Chat = () => {
     messagePusher.bind("NEW_MESSAGE", (message: ChatMessage) => {
       console.log("ON NEW MESSAGE TRIGGER")
       dispatch(messagesActions.addMessage(message));
-    }, messagePusher.unbind("NEW_MESSAGE"));
+    });
   }
 
 
