@@ -1,15 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Language from "../models/language";
 
 interface codeEditorSlice {
-  code: string;
-  language: {
-    value: string;
-    label: string;
-  };
+  code: string | null;
+  language: Language
 }
 
 const initialState: codeEditorSlice = {
-  code: "// happy typing",
+  code: null,
   language: { value: "javascript", label: "javascript" },
 };
 
@@ -21,6 +19,7 @@ const codeEditorState = createSlice({
       state.code = action.payload;
     },
     setLanguage: (state, action) => {
+      console.log(action)
       state.language.value = action.payload.value;
       state.language.label = action.payload.label;
     }

@@ -1,33 +1,70 @@
 import Editor from "@monaco-editor/react";
-import { useDispatch } from "react-redux";
+import { useEffect, useReducer, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { codeEditorActions } from "../../store/code-editor-slice";
 
 import classes from "./CodeEditor.module.css";
 
-const CodeEditor = () => {
-  
-  const dispatch = useDispatch()
+const codeReducer = (state: any, action: any) => {
+  if (action.type === 'USER_INPUT') {
+    console.log("USER INPUT")
+    return { value: action.val };
+  }
+  return { value: '' };
+};
 
-  const codeChangeHandler = (event: any) => {
-    dispatch(codeEditorActions.setCode(event))
-  };
+const CodeEditor = () => {
 
   let code = useSelector((state: RootState) => {
-    return state.editor.code
+    return state.editor.code;
   });
 
   const codeLangauge = useSelector((state: RootState) => {
     return state.editor.language.value;
   });
 
+  const roomId = useSelector((state: RootState) => {
+    return state.session.roomId;
+  })
+
+  const [codeState, dispatchCode] = useReducer(codeReducer, {
+    value: code,
+  });
+
+  const { value: codeValue } = codeState;
+
+  const codeChangeHandler = (event: any) => {
+    dispatchCode({ type: 'USER_INPUT', val: event });
+  };
+
+  async function setCode(code: string) {
+    await fetch(`/api/editor/send-code`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({code: code, roomId: roomId}),
+      method: "POST",
+    });
+  }
+
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      if(code) setCode(codeValue)
+    }, 800);
+
+    return () => {
+      clearTimeout(identifier);
+    };
+  }, [codeValue]);
+
+
+
+
   return (
     <div className={classes.editor}>
       <Editor
         defaultLanguage="javascript"
         language={codeLangauge}
-        defaultValue="// some comment"
         value={code}
         theme={"vs-dark"}
         onChange={codeChangeHandler}

@@ -1,18 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import pusher from "../../../pusher/client";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === "GET") {
+  if (req.method === "POST") {
 
-    const Redis = require("ioredis");
-    const redisClient = new Redis(process.env.REDIS_CONNECTION_STRING);
+    const language = req.body.language;
+    const roomId = req.body.roomId;
 
-    const roomId = req.query['roomId']
-    const messages = await redisClient.lrange(`MESSAGES:${roomId}`, 0, -1)
-    await redisClient.quit();
-    res.status(200).json({messages: messages.reverse()});
+    await pusher.trigger(roomId, 'SET_LANGUAGE', language);
+    
+    res.status(200).json({language: language});
   } else {
     //Response for other than POST method
     res.status(500).json({ message: "Route not valid" });

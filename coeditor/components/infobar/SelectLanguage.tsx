@@ -1,14 +1,23 @@
 import React from 'react';
 import SelectCodeLanguage from './SelectCodeLanguage';
-import { codeEditorActions } from '../../store/code-editor-slice';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 const SelectLanguage = () => {
 
-  const dispatch = useDispatch()
+  let roomId = useSelector((state: RootState) => {
+    return state.session.roomId;
+  })
 
-  const onCodeSelect = (event: any) => {
-    dispatch(codeEditorActions.setLanguage(JSON.parse(event.target.value)));
+  const onCodeSelect = async (event: any) => {
+    const language = JSON.parse(event.target.value)
+    await fetch(`/api/editor/set-language`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({language: language, roomId: roomId}),
+      method: "POST",
+    });
   };
 
     return (

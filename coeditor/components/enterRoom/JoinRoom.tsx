@@ -50,6 +50,7 @@ const JoinRoom = () => {
       localStorage.setItem("username", name);
       router.push(`/coeditor/${roomId}`);
     } else {
+      setIsLoading(false);
       const response = await res.json();
       showToast(response.message);
     }

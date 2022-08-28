@@ -10,9 +10,11 @@ export default async function handler(
     const redisClient = new Redis(process.env.REDIS_CONNECTION_STRING);
 
     const roomId = req.query['roomId']
-    const messages = await redisClient.lrange(`MESSAGES:${roomId}`, 0, -1)
+    const code = await redisClient.get(`CODE:${roomId}`)
     await redisClient.quit();
-    res.status(200).json({messages: messages.reverse()});
+
+    console.log(code)
+    res.status(200).json({code: code});
   } else {
     //Response for other than POST method
     res.status(500).json({ message: "Route not valid" });

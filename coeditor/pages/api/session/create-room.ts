@@ -9,11 +9,11 @@ export default async function handler(
 
     const Redis = require("ioredis");
     const redisClient = new Redis(process.env.REDIS_CONNECTION_STRING);
-
     const roomId = v4();
 
     await redisClient.hset(`ROOM:${roomId}`, "", "");
     await redisClient.lpush(`USERS:${roomId}`, "");
+    await redisClient.set(`CODE:${roomId}`, 'aaaaaaaaaaaaa');
     await redisClient.quit();
     res.status(200).json({ roomId: roomId });
   } else {

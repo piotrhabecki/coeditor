@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Coeditor from "../../../components/coeditor/Coeditor";
 import Footer from "../../../components/footer/Footer";
 import { RootState } from "../../../store";
+import { codeEditorActions } from "../../../store/code-editor-slice";
 import { messagesActions } from "../../../store/messages-slice";
 import { sessionActions } from "../../../store/session-slice";
 import { socketActions } from "../../../store/socket-slice";
@@ -68,19 +69,28 @@ const EditorPage: React.FC<{
     });
       if(res.ok)
       {
-        const res = await fetch(`/api/messages/get-messages?roomId=${roomId}`, {
+        let res = await fetch(`/api/messages/get-messages?roomId=${roomId}`, {
           headers: {
             "Content-Type": "application/json",
           },
           method: "GET",
         });
-        const result = await res.json();
-        dispatch(messagesActions.setMessages(result.messages));
+        const messageResult = await res.json();
+
+        res = await fetch(`/api/editor/get-code?roomId=${roomId}`, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        });
+        const codeResult = await res.json();
+
+        dispatch(messagesActions.setMessages(messageResult.messages));
+        dispatch(codeEditorActions.setCode(codeResult.code));
         dispatch(socketActions.setMessagePusher(pusher));
         dispatch(sessionActions.setRoomId(roomId));
         dispatch(sessionActions.setUsername(username));
         dispatch(sessionActions.setOtherUserConnected(otherUsersConnected))
-
       }
     }
   };

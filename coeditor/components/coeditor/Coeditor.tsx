@@ -2,7 +2,7 @@ import { Card, Elevation } from "@blueprintjs/core";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import Chat from "../chat/Chat";
-import CodeEditor from "../console/CodeEditor"
+import Editor from "../console/Editor";
 import Output from "../console/Output";
 import Infobar from "../infobar/Infobar";
 
@@ -20,7 +20,7 @@ const Coeditor = () => {
       <div className={classes.editor__container}>
         <div className={classes.editor__space}>
           <Card elevation={Elevation.TWO} className={classes.editor_card + " bp4-dark"}>
-            <CodeEditor />
+            <Editor />
           </Card>
           <Card elevation={Elevation.TWO} className="bp4-dark">
             <Output logs={output}/>
