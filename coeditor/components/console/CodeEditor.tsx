@@ -49,7 +49,7 @@ const CodeEditor = () => {
 
   useEffect(() => {
     const identifier = setTimeout(() => {
-      if(code) setCode(codeValue)
+      if(code !== undefined) setCode(codeValue)
     }, 800);
 
     return () => {

@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import Language from "../models/language";
 
 interface codeEditorSlice {
-  code: string | null;
+  code: string | undefined;
   language: Language
 }
 
 const initialState: codeEditorSlice = {
-  code: null,
+  code: undefined,
   language: { value: "javascript", label: "javascript" },
 };
 
