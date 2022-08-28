@@ -6,7 +6,7 @@ import classes from "./Chat.module.css";
 import { Button } from "@blueprintjs/core";
 
 interface input {
-  onMessageSend: (message: string) => Promise<void>
+  onMessageSend: (message: string) => void
 }
 
 const Input = (props: input) => {
@@ -30,16 +30,16 @@ const Input = (props: input) => {
     setMessage(event.currentTarget.value);
   }
 
-  const onEnter = async (event: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => {
+  const onEnter = (event: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => {
     if(event.key === "Enter")
     {
-      await onSend()
+      onSend()
     }
   }
 
-  const onSend = async () => {
+  const onSend = () => {
     console.log("ON SEND CLICKED")
-    await props.onMessageSend(message);
+    props.onMessageSend(message);
     setMessage("");
   }
 
