@@ -16,7 +16,7 @@ export default async function handler(
     await redisClient.lpush(`MESSAGES:${roomId}`, JSON.stringify({message: message.message, username: message.username}));
     await redisClient.quit();
     console.log("SEND")
-    pusher.trigger(roomId, 'NEW_MESSAGE', message);
+    await pusher.trigger(roomId, 'NEW_MESSAGE', message);
 
     res.status(200).json({message: 'OK'});
   } else {
