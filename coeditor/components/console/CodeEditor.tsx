@@ -55,6 +55,7 @@ const CodeEditor = () => {
     return () => {
       clearTimeout(identifier);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [codeValue]);
 
 
@@ -65,7 +66,7 @@ const CodeEditor = () => {
       <Editor
         defaultLanguage="javascript"
         language={codeLangauge}
-        value={code}
+        value={code!}
         theme={"vs-dark"}
         onChange={codeChangeHandler}
       />
