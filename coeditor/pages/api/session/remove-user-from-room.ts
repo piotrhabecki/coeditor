@@ -17,7 +17,7 @@ export default async function handler(
 
     const users = await redisClient.lrange(`USERS:${roomId}`, 0, -1);
     console.log(users);
-    if (users.length === 1) {
+    if (users.length === 2) {
       await redisClient.del(`USERS:${roomId}`);
       await redisClient.del(`ROOM:${roomId}`);
     } else if (users.includes(username)) {
