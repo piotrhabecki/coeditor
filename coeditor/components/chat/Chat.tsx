@@ -63,7 +63,7 @@ const Chat = () => {
     messagePusher.bind("NEW_MESSAGE", (message: ChatMessage) => {
       console.log("ON NEW MESSAGE TRIGGER")
       dispatch(messagesActions.addMessage(message));
-    }, messagePusher.unbind());
+    }, messagePusher.unbind("NEW_MESSAGE"));
   }
 
 
