@@ -25,7 +25,7 @@ export default async function handler(
     } else {
       const users = await redisClient.lrange(`USERS:${roomId}`, 0, -1);
       if (!users.includes(username)) {
-        await redisClient.hset(`ROOM:${roomId}`, socketId, username);
+        await redisClient.hset(`ROOM:${roomId}`, username, socketId);
         await redisClient.lpush(`USERS:${roomId}`, username);
         await redisClient.quit();
 

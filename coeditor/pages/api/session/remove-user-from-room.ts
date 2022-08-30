@@ -20,9 +20,14 @@ export default async function handler(
     if (users.length === 2) {
       await redisClient.del(`USERS:${roomId}`);
       await redisClient.del(`ROOM:${roomId}`);
+      await redisClient.del(`CODE:${roomId}`)
+      await redisClient.del(`MESSAGES:${roomId}`)
     } else if (users.includes(username)) {
+      console.log("ON REMOVE INSIDE");
+      console.log(username)
+      console.log(socketId)
       await redisClient.lrem(`USERS:${roomId}`, -5, username);
-      await redisClient.hdel(`ROOM:${roomId}`, -5, socketId, username);
+      await redisClient.hdel(`ROOM:${roomId}`, username, socketId);
 
       pusher.trigger(roomId, "USER_DISCONNECTED", username);
       await redisClient.quit();

@@ -7,7 +7,7 @@ interface codeEditorSlice {
 }
 
 const initialState: codeEditorSlice = {
-  code: undefined,
+  code: '',
   language: { value: "javascript", label: "javascript" },
 };
 
