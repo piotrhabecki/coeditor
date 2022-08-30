@@ -31,8 +31,8 @@ const EditorPage: React.FC<{
       socketInitializer(username, roomId, otherUsersConnected);
     }
 
-    window.onbeforeunload = () => {
-        fetch(`/api/session/remove-user-from-room`, {
+    window.onbeforeunload = async () => {
+        await fetch(`/api/session/remove-user-from-room`, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -43,7 +43,7 @@ const EditorPage: React.FC<{
           }),
           method: "DELETE",
         });
-        messagePusher!.disconnect();
+        await messagePusher!.disconnect();
         dispatch(socketActions.setMessagePusher(null));
         router.push("/");
     }

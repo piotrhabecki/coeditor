@@ -13,7 +13,7 @@ export default async function handler(
 
     await redisClient.hset(`ROOM:${roomId}`, "", "");
     await redisClient.lpush(`USERS:${roomId}`, "");
-    await redisClient.set(`CODE:${roomId}`, 'aaaaaaaaaaaaa');
+    await redisClient.set(`CODE:${roomId}`, '//happy typing');
     await redisClient.quit();
     res.status(200).json({ roomId: roomId });
   } else {

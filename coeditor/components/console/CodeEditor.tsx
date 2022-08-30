@@ -49,7 +49,7 @@ const CodeEditor = () => {
 
   useEffect(() => {
     const identifier = setTimeout(() => {
-      if(code !== undefined) setCode(codeValue)
+      setCode(codeValue)
     }, 800);
 
     return () => {
@@ -66,7 +66,7 @@ const CodeEditor = () => {
       <Editor
         defaultLanguage="javascript"
         language={codeLangauge}
-        value={code!}
+        value={code}
         theme={"vs-dark"}
         onChange={codeChangeHandler}
       />
