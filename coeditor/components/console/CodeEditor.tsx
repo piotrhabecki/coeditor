@@ -50,7 +50,7 @@ const CodeEditor = () => {
   useEffect(() => {
     const identifier = setTimeout(() => {
       setCode(codeValue)
-    }, 800);
+    }, 400);
 
     return () => {
       clearTimeout(identifier);
