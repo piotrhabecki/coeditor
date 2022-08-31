@@ -42,12 +42,14 @@ export default async function handler(
     try {
       var script = new VMScript(`ext.exports = ${code}`).compile();
     } catch (err) {
+      //@ts-ignore it is string...
       evalResult = err.toString();
     }
 
     try {
       evalResult = vm.run(new VMScript(code));
     } catch (err) {
+      //@ts-ignore it is string...
       evalResult = err.toString();
     }
 
