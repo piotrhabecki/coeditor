@@ -7,7 +7,6 @@ import classes from "./CodeEditor.module.css";
 
 const codeReducer = (state: any, action: any) => {
   if (action.type === 'USER_INPUT') {
-    console.log("USER INPUT")
     return { value: action.val };
   }
   return { value: '' };
@@ -50,7 +49,7 @@ const CodeEditor = () => {
   useEffect(() => {
     const identifier = setTimeout(() => {
       setCode(codeValue)
-    }, 400);
+    }, 800);
 
     return () => {
       clearTimeout(identifier);

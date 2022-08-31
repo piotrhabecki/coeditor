@@ -1,4 +1,4 @@
-import { Button, Intent, Spinner } from "@blueprintjs/core";
+import { Button, Intent, Spinner, SpinnerSize } from "@blueprintjs/core";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -57,13 +57,17 @@ const JoinRoom = () => {
   };
 
   return (
-    <div className={classes.join_room__container}>
+    <>
       {isLoading ? (
         <div>
-          <Spinner />
+          <Spinner
+            className={classes.spinner}
+            size={SpinnerSize.LARGE}
+            intent={Intent.SUCCESS}
+          />
         </div>
       ) : (
-        <>
+        <div className={classes.join_room__container}>
           <h2>Join room</h2>
           <input onChange={onRoomIdChange} placeholder="room id" />
           <input onChange={onNameChange} placeholder="your name" />
@@ -74,9 +78,9 @@ const JoinRoom = () => {
             disabled={roomId.length == 0 || name.length == 0}
             onClick={onJoinSession}
           />
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

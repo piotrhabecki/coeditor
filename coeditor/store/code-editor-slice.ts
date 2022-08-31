@@ -7,7 +7,7 @@ interface codeEditorSlice {
 }
 
 const initialState: codeEditorSlice = {
-  code: '',
+  code: 'console.log("happy typing");',
   language: { value: "javascript", label: "javascript" },
 };
 

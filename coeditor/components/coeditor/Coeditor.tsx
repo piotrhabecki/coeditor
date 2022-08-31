@@ -1,6 +1,4 @@
 import { Card, Elevation } from "@blueprintjs/core";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
 import Chat from "../chat/Chat";
 import Editor from "../console/Editor";
 import Output from "../console/Output";
@@ -9,10 +7,6 @@ import Infobar from "../infobar/Infobar";
 import classes from "./Coeditor.module.css";
 
 const Coeditor = () => {
-
-  let output = useSelector((state: RootState) => {
-    return state.output.output;
-  });
 
   return (
     <div className={classes.app__container}>
@@ -23,7 +17,7 @@ const Coeditor = () => {
             <Editor />
           </Card>
           <Card elevation={Elevation.TWO} className="bp4-dark">
-            <Output logs={output}/>
+            <Output />
           </Card>
         </div>
         <div className={classes.editor__chat}>

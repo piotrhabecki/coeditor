@@ -16,7 +16,6 @@ export default async function handler(
       const code = await redisClient.get(`CODE:${roomId}`)
       await redisClient.quit();
   
-      console.log(code)
       res.status(200).json({code: code});
       return;
     }

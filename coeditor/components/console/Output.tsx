@@ -1,16 +1,29 @@
 import { Pre } from "@blueprintjs/core";
-import classes from './Output.module.css'
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import classes from "./Output.module.css";
 
-interface output {
-    logs: string;
-}
+const Output = () => {
+  let output = useSelector((state: RootState) => {
+    return state.output.output;
+  });
 
-const Output = (props: output) => {
+  console.log(output.ConsoleOutput);
+  const consoleOutputs = output.ConsoleOutput?.map((element, index) => <li key={index}>{element}</li>)
 
   return (
-      <Pre className={classes.output}>
-        {props.logs ? props.logs : 'here the output will be displayed'}
-      </Pre>
+    <Pre className={classes.output}>
+      {output.EvalOutput || output.ConsoleOutput ? (
+        <>
+          <p>Evaluate output: {output.EvalOutput}</p>
+          <p>
+            Console output: <ul>{consoleOutputs}</ul>
+          </p>
+        </>
+      ) : (
+        "here the output will be displayed"
+      )}
+    </Pre>
   );
 };
 

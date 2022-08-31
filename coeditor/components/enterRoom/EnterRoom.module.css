@@ -1,57 +1,61 @@
 .enter_room__container {
-    position: absolute;
-    top:  50%;
-    left: 50%;
-    transform: translate(-50%,-65%);
-    width: 750px;
-    height: 500px;
-    display: grid;
-    grid-template-columns: 25% 75%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -65%);
+  width: 750px;
+  height: 500px;
+  display: grid;
+  grid-template-columns: 25% 75%;
 }
 
 .logo__container {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
-    padding-right: 10px;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding-right: 10px;
+  text-align: center;
 }
 
 .elements_with_button__container {
-    display: grid;
-    grid-template-rows: 90% 10%;
+  display: grid;
+  grid-template-rows: 90% 10%;
 }
 
 .join_room__container {
-    display: grid;
-    grid-template-rows: repeat(4, 1fr);
-    justify-content: center;
-    padding-top: 5rem;
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  justify-content: center;
+  padding-top: 5rem;
 }
 
 .join_room__container > h2 {
-    text-align: center;
+  text-align: center;
 }
 
 .join_room__container > input {
-    width: 250px;
-    height: 25px;
+  width: 250px;
+  height: 25px;
 }
 
 .create_room__container {
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    justify-content: center;
-    padding-top: 5rem;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  justify-content: center;
+  padding-top: 5rem;
 }
 
 .create_room__container > h2 {
-    text-align: center;
+  text-align: center;
 }
 
 .create_room__container > input {
-    width: 250px;
-    height: 25px;
+  width: 250px;
+  height: 25px;
+}
+
+.spinner {
+  margin-top: 25%;
 }

@@ -1,3 +1,5 @@
 .output {
     height: 90%;
+    max-height: 18vh;
+    overflow:scroll;
 }

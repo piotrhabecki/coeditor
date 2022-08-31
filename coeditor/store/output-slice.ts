@@ -1,11 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface outputState {
-  output: string;
+  
+  output: {
+    EvalOutput: string | null;
+    ConsoleOutput: string[] | null;
+  }
 }
 
 const initialState: outputState = {
-    output: "Here the output of code run will be displayed",
+    output: {
+      EvalOutput: "Here the output of code run will be displayed",
+      ConsoleOutput: [""]
+    }
 };
 
 const outputState = createSlice({
@@ -13,8 +20,26 @@ const outputState = createSlice({
   initialState: initialState,
   reducers: {
     setOutput: (state, action) => {
-      state.output = action.payload;
+      if(Object.keys(action.payload.evalOutput).length !== 0)
+      {
+        state.output.EvalOutput = action.payload.evalOutput;
+      }
+      else
+      {
+        state.output.EvalOutput = "";
+      }
+      if(action.payload.consoleOutput.length !== 0)
+      {
+        state.output.ConsoleOutput = action.payload.consoleOutput
+      }
+      else 
+      {
+        state.output.ConsoleOutput = [""];
+      }
     },
+    runJavascriptCode: (state, action) => {
+      
+    }
   },
 });
 

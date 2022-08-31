@@ -31,3 +31,12 @@
   padding-right: 0;
   border: 1px solid gray;
 }
+
+/* ================ MEDIA QUERIES (MEDIUM DEVICES) ================== */
+
+@media screen and (max-width: 1215px) {
+  .app__container {
+    grid-template-rows: 100px 95%;
+    gap: 1rem;
+  }
+}
