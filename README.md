@@ -28,6 +28,8 @@ The Javascript code can be compiled on the server with help of <a target="_blank
 
 The syntaxt higlight is provided by <a target="_blank" href="https://microsoft.github.io/monaco-editor/">Monaco Editor</a>
 
+The application is written fully in React and styled with CSS with Next.js library.
+
 ## Live demo and manual
 
 <div align="center">
